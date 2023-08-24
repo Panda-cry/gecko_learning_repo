@@ -1,0 +1,66 @@
+REST - API
+REST -> Representation State Transfer -> XML,JSON,TEXT
+API -> Aplication Programming interface
+API predstavlja nesto sto treba da prikazemo  tj da server obezbedi endpointe
+ono sto predstavlajmo svetu tj uri http://nesto.com/api/resursi
+
+REST prestavlja taj flow
+Sta se prenosi ali po nekom pravilu
+Klijent posalje zahtev
+Server prvo autentifikuje user-a
+Pocne da izvrsava request
+Posalje response po pravilu STatus code , message , neki header-i
+Stateless -> ne menja neko stanje nema konstantnog zatvaranja kanala
+Samo posalje se reguest daje respons i tjt Ne cuva neku informaciju od klijenta
+Omogucene su CRUD operacije :D
+
+SOAP -> Simple Object Access Protocol
+ako imamo neka 2 servisa na 2 razlicita programska jezika
+lako je kroistit soap jer je baziran na xml i lako se parsira i komunicira
+
+
+
+
+Ako stavljamo i pordukciju potrebno je nas server da stavion na odredjeno WSGI servis
+jer jedno je development, a jedno production
+Gunicorn
+Waitress
+mod_wsgi
+uWSGI
+gevent
+eventlet
+ASGI
+Svaki ima nesto posebno od gore pomenutih WSGI servisa
+Nakon toga pozeljno je da se ispred naseg servisa stavi neki NGInx to je reverse proxy koji je zaduzen za TLS
+protokol primanje http request, load-balancing i ostalo
+
+Za gunicorn se podize tako sto se stavi naziv modula:i sta sto stavili app.run() naziv modula gde se dize servis
+-w broj vorkera -b na sta mozemo da bind na koju adresu tj :D
+Nginx kada budemo stavljali na docker pa povucemo image i povezemo sa nginx.conf
+server {
+    listen 80;
+    server_name _;
+
+    location / {
+        proxy_pass http://127.0.0.1:8000/;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Prefix /;
+    }
+}
+
+
+ADMIN page kao sto django ima odmah admin.view() da moze da se kao pretrazuje i ceprka po bazi tako i ovde moze da se instalira
+flask-admin i da se iskoriti
+flaks-user je isto smesan plugin ima dosta fatures koje ne moram da implementiramo kao email confirm hash pass ali to je samo za server
+side servis
+
+py barbel extension za prevod npr :D
+
+flask-restless je slicno nesto kao postgresrest jer samo napravimo modele dodelimo resteless manageru i ne moramo da pisemo CRUD operacije za te modele
+nego cemo vec dobiti odmah. Malo mozda sto je zahtevnije jeste pisanje query za dobijanje podataka iz baze, malo je necitko ali sve u svemu
+dosta ima implementiranog
+
+flask-security je kombinacija flask user kreiramo user sa nekim rolama koje kasnije mogu lagano da se proveravaju
+slanje mail-a je relativno jednostavno, nema kucanja neke logike samo se postavi u config par stvario i otprilike je to to

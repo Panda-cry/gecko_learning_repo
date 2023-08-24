@@ -1,0 +1,58 @@
+Kada se kreira baza ne mora da se stavlja init jer je iz db.Model to povuceno
+moze samo Model(variable = "nesto")
+Takdje mozda i laksi nacin pretrazivanja po bazi jer
+Model.query.filter(Modle.variable == "nesto")
+Model.query.filter(db.or_(Model.variable == "" , Model.variable == "")
+Model.query.filter(Modle.variable == "nesto", Model.variable == "") to je and
+Modle.query. filter ect vracaju objekat iz orm baze ne vracaju neke vrednosti
+kada se odradi all ili first onda se dobijaju vrednosti
+.filter(Model.variable > >= < <= != ) sve dolazi u obzir
+.fiter(Model.variable.like("%nest%)) pretrazivanje stringova
+order_by slaganje po necemu
+.limit(num).all() odredjuje limit
+.offset(3).all() preskace prva 3 pa sve do kraja
+backref govori da iz klase koja ima foreign_key mozemo da pristupimo
+lazy opcije govore kako moze da se pretrazuje tj da se join tabela
+dynamic vraca opet query objekat
+select je default
+joined stapanje je u jednoj select komandi jer se koristi join kada parent bude trazio onda se odmah i rado jion relacije
+subquery isto sto i gore samo 2 query
+
+
+ONE to MANY
+class Person(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+    addresses = db.relationship('Address', backref='person', lazy=True)
+
+class Address(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), nullable=False)
+    person_id = db.Column(db.Integer, db.ForeignKey('person.id'),
+        nullable=False)
+
+one to one samo u relation stavljamo  uselist=false
+
+Many to Many
+
+tags = db.Table('tags',
+    db.Column('tag_id', db.Integer, db.ForeignKey('tag.id'), primary_key=True),
+    db.Column('page_id', db.Integer, db.ForeignKey('page.id'), primary_key=True)
+)
+
+class Page(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    tags = db.relationship('Tag', secondary=tags, lazy='subquery',
+        backref=db.backref('pages', lazy=True))
+
+class Tag(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+helper table nikako da bude model preporucljivo je da bude ovako kao tabela
+
+
+User.query.filter(User.email.endswith('@example.com')).all()
+moze filter i onda da se kroste string int dodatne fje :D
+class TimestampMixin:
+    created = db.Column(
+        db.DateTime, nullable=False, default=datetime.utcnow)
+    updated = db.Column(db.DateTime, onupdate=datetime.utcnow)

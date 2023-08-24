@@ -1,0 +1,8 @@
+Socket io je koristan ako pravimo aplikaciju tj server koji ce da radi u realnom vremenu
+brzi je nego standardana metoda putem http, ako imamo vezano 1000 klijenata stara metoda treba da salje 1000 response poruka
+ovde su klijenti vec povezani i mogu se svi notifikovati odmah
+Moze da se koristi kod kladionica tj sportova, chat programa tako nekih stvari gde je potrebno real-time akcija
+Dobar je jer ima namespace moze da se odvoje eventi da se gadjaju drugacije,
+event based bidireksn znaci jedna konekcija je potrebna da se salje vise poruka sto sa servera ka klijentu i obratno
+klasika je request-response ili stateless nema cuvanja konekcije, ovde je statefull
+takodje postoje room polja koja mogu da grupisu klijente :D

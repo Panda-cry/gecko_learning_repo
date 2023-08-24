@@ -1,0 +1,21 @@
+flask db init
+Kreira migracioni folder /  trebao bi da se doda u version control -  git
+flask db migrate  -m"Message" kreira inicialnu migraciju
+potrebno je pogledati Amblemic migracuju jer nije perfektna i nekada moze da pogresi
+flask db upgrade primena promena flask db downgrade drop table :D
+Svaki put kada se desi promena SQLalchemi tabela treba da se uradi migrate i upgrade
+
+Da bi sinhronizovali bazu  na drugom sistemu samo se refresh db folder i odraditi upgrade
+
+
+postoji mogucnost da se ne mora flaks db migrate init itd.
+Moze da se napravi flask_script manager i da se kreira Manager manager.run()
+ako imamo manager.run ne treba app.run
+ond amozemo da pristupamo preko python modul varijabla pa init migrate itd.
+
+Ako migracija brise neku kolinu proveriti da li podrzava baza migraciju kolone
+ako ne treba da se uradi with op.batch pa zamena kolone
+moze da se radi i ako ima podataka u bazi :D
+
+Jako korisna stvar ali mora se pazi amblemic jer nije bas siguran
+tako da ga uvek treba proveriti

@@ -1,0 +1,31 @@
+Ovde bas nije merodavno jer se koristi flask_login sto se pretpostavlja da ce i front biti u static folderu/templates
+ako se to zajedno koristi onda je ok ali posto cu ja sa React da radim ne ide to bas tako, jer se react vrv treba podici
+na drugom portu i url ce biti drugaciji.
+SESSION based je da se session_id cuva u bazi moze biti premanent ili time based da se nakon nekog vremena bude expired
+Nakon login se kreira taj session_id koji se cuva i vraca se klijentu, koji koristi stalno sada sesion_id kao identifier
+to bi trebalo da predstavlja neki random string koji nema neke vrednosti samo je tu da se moze autentifikovati neko. Trebalo
+bi da prati aktivnost koristinka
+
+COOCKIE based je slicno samo sto se u cookie moze staviti nesto, isto session_id koji se razmenjuje, ali moze i da se
+ubaci nesto kao poput korpe, pa kad se rest page mozemo videti sta je u korpi ili tako nesto, isto ime expire time
+moze da ima neke podatke kao fazon da ne moras da se logujes i to. Prati sta koristik radi sa datom
+
+
+TOKEN based je JWT token gde imamo neke informacije ali koje ne mogu da se zloupotrebe. Isto je expired -> daje ga server
+ali ga ne cuva u bazi. Moze da ima Claims to je vise za autorizaciju/role/prava pristupa itd. HEsovan je pa se svaka provena
+moze videti odmah. Koristi se vise kad imamo vise app tj mobile,deskotop itd.
+
+Za sva 3 salje se klijentu cookie/token na cuvanje samo sto se malo drugacije na backend-u proverava
+SESSION_COOKIE_HTTPONLY=True nema menjanja na client side
+
+
+SESION based se koristi kada je server side frontend dok token kada imamo mobile sigle-page web app kad je podeljen
+back i front
+
+sesion je samo neki niz koji se cuva u cookie a u cookie moze biti ta neka korpa od gore navedeno to je slicno
+samo je razlika sta se stavlja u cookie,
+
+
+sesion_id se cuva na serveru -> statefull
+cookie se cuva na serverskoj strani i to je neki string uglavnom ima razne stvari expire date i tako nesto kao obican dict moze da se iskoristi
+jwt autorizacija i tako to  :D

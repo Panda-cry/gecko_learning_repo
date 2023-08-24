@@ -1,0 +1,17 @@
+Variable koje importujemo kao sto sto IMAGE TEXT
+oni su ustvari tuple koje mogu da se prave novi tuple
+IMAGE + TEXT da imamo jedan tupl koji moze da ima i slike i txt fajl
+Mozemo mi tu jos svasta dodati
+app.config mozemo da dodamo default vrednost gde se cuva
+ako nesto ne moze baca se greska UploadNotAllowed
+mozemo u app config da dozvolimo ili zabranimo odredjene stvar da se upload
+kada stavljamo Upload set stavimo sta otpilike cuvamo i damo toj varaijabli takvo ime
+kada se lepi konfiguracija onda se samo vezuje sa app
+u app treba da bude u sredini isto kao i naziv npr UPLOADED_Nazovi_iz_upload_set_DEST...ALLOW__DENY itd.
+
+Po nekom pravilu  ne bi trebalo da se cuva slika i ostale stvari u bazu jer kad klijent salje on salje niz bajtova
+Iako ima kompresija fajla koji se salje trebamo da pazimo jer ce nakon nekog vremena postati glomazna
+Najbolji nacin je da koristimo neku putanju npr Amazon ima S3 namenjenu samo za cuvanje fajlova
+Tako da kada cuvamo imamo jedam Model koji pamti url gde je slika sacuvana, da li je izbrisana logicki,
+id, naziv slike. A kada klijent zatrazi tu sliku moze samo preko url da komunicira sa Amazon ili sa nekim drugim provajedrom
+i tako smanjujemo svoje muke.
